@@ -38,7 +38,7 @@ def __predict_plant_disease(request):
             else :
                 return_data = {
                     "error" : "3",
-                    "data" : f"Error : {err_msg}"
+                    "message" : f"Error : {err_msg}"
                 }
         else :
             return_data = {
