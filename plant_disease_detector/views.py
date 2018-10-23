@@ -34,7 +34,7 @@ def __predict_plant_disease(request):
                 header, image_data = request_data.split(';base64,')
                 image_array, err_msg = image_converter.convert_image(image_data)
                 if image_array != None :
-                    model_file = f"{BASE_DIR}/ml_model/random_forest_classifier_99.15.pkl"
+                    model_file = f"{BASE_DIR}/ml_model/random_forest_classifier_99.49.pkl"
                     saved_classifier_model = pickle.load(open(model_file,'rb'))
                     prediction = saved_classifier_model.predict(image_array) 
                     return_data = {
