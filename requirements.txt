@@ -6,5 +6,8 @@ gunicorn==19.8.1
 pipenv==2018.7.1
 virtualenv==16.0.0
 virtualenv-clone==0.3.0
-opencv-contrib-python==3.4.1.15
-opencv-python==3.4.1.15
+numpy==1.14.3
+Pillow==5.1.0
+sklearn==0.0
+scikit-learn==0.19.1
+scipy==1.1.0
