@@ -20,31 +20,37 @@ def __index__function(request):
     }
     return HttpResponse(json.dumps(return_data), content_type='application/json; charset=utf-8')
 
-@api_view(['POST'])
+@api_view(['POST','GET'])
 def __predict_plant_disease(request):
     try:
-        if request.body:
-            request_data = request.data["plant_image"]
-            header, image_data = request_data.split(';base64,')
-            image_array, err_msg = image_converter.convert_image(image_data)
-            if image_array != None :
-                model_file = f"{BASE_DIR}/ml_model/random_forest_classifier_99.15.pkl"
-                saved_classifier_model = pickle.load(open(model_file,'rb'))
-                prediction = saved_classifier_model.predict(image_array) 
-                return_data = {
-                    "error" : "0",
-                    "data" : f"{prediction[0]}"
-                }
+        if request.method == "GET" :
+            return_data = {
+                "error" : "0",
+                "message" : "Plant Disease Recognition Api. Built for NaijaHacks 2018"
+            }
+        else:
+            if request.body:
+                request_data = request.data["plant_image"]
+                header, image_data = request_data.split(';base64,')
+                image_array, err_msg = image_converter.convert_image(image_data)
+                if image_array != None :
+                    model_file = f"{BASE_DIR}/ml_model/random_forest_classifier_99.15.pkl"
+                    saved_classifier_model = pickle.load(open(model_file,'rb'))
+                    prediction = saved_classifier_model.predict(image_array) 
+                    return_data = {
+                        "error" : "0",
+                        "data" : f"{prediction[0]}"
+                    }
+                else :
+                    return_data = {
+                        "error" : "3",
+                        "message" : f"Error : {err_msg}"
+                    }
             else :
                 return_data = {
-                    "error" : "3",
-                    "message" : f"Error : {err_msg}"
+                    "error" : "1",
+                    "message" : "Request Body is empty",
                 }
-        else :
-            return_data = {
-                "error" : "1",
-                "message" : "Request Body is empty",
-            }
     except Exception as e:
         return_data = {
             "error" : "3",
