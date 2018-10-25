@@ -1,4 +1,4 @@
-api/__pycache__/*
-custom_code/__pycache__/*
-plant_disease_detector/__pycache__/*
+api/__pycache__/
+custom_code/__pycache__/
+plant_disease_detector/__pycache__/
 *.yaml
