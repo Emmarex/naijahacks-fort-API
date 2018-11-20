@@ -33,17 +33,18 @@ def __predict_plant_disease(request):
                 request_data = request.data["plant_image"]
                 header, image_data = request_data.split(';base64,')
                 image_array, err_msg = image_converter.convert_image(image_data)
-                if image_array != None :
-                    model_file = f"{BASE_DIR}/ml_model/random_forest_classifier_99.49.pkl"
+                if err_msg == None :
+                    model_file = f"{BASE_DIR}/ml_model/cnn_model.pkl"
                     saved_classifier_model = pickle.load(open(model_file,'rb'))
                     prediction = saved_classifier_model.predict(image_array) 
+                    label_binarizer = pickle.load(open(f"{BASE_DIR}/ml_model/label_transform.pkl",'rb'))
                     return_data = {
                         "error" : "0",
-                        "data" : f"{prediction[0]}"
+                        "data" : f"{label_binarizer.inverse_transform(prediction)[0]}"
                     }
                 else :
                     return_data = {
-                        "error" : "3",
+                        "error" : "4",
                         "message" : f"Error : {err_msg}"
                     }
             else :
