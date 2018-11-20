@@ -21,7 +21,7 @@ def __index__function(request):
     return HttpResponse(json.dumps(return_data), content_type='application/json; charset=utf-8')
 
 @api_view(['POST','GET'])
-def __predict_plant_disease(request):
+def predict_plant_disease(request):
     try:
         if request.method == "GET" :
             return_data = {
@@ -34,10 +34,10 @@ def __predict_plant_disease(request):
                 header, image_data = request_data.split(';base64,')
                 image_array, err_msg = image_converter.convert_image(image_data)
                 if err_msg == None :
-                    model_file = f"{BASE_DIR}/ml_model/cnn_model.pkl"
+                    model_file = f"{BASE_DIR}/ml_files/cnn_model.pkl"
                     saved_classifier_model = pickle.load(open(model_file,'rb'))
                     prediction = saved_classifier_model.predict(image_array) 
-                    label_binarizer = pickle.load(open(f"{BASE_DIR}/ml_model/label_transform.pkl",'rb'))
+                    label_binarizer = pickle.load(open(f"{BASE_DIR}/ml_files/label_transform.pkl",'rb'))
                     return_data = {
                         "error" : "0",
                         "data" : f"{label_binarizer.inverse_transform(prediction)[0]}"
