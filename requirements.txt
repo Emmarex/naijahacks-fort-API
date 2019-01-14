@@ -1,4 +1,4 @@
-Django==2.0.7
+Django==2.0.10
 django-heroku==0.3.1
 django-hosts==3.0
 djangorestframework==3.8.2
