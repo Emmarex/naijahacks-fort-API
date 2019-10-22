@@ -7,7 +7,7 @@ pipenv==2018.7.1
 virtualenv==16.0.0
 virtualenv-clone==0.3.0
 numpy==1.14.3
-Pillow==5.1.0
+Pillow==6.2.0
 sklearn==0.0
 scikit-learn==0.19.1
 scipy==1.1.0
