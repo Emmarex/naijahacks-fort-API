@@ -1,7 +1,7 @@
 Django==2.0.10
 django-heroku==0.3.1
 django-hosts==3.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 gunicorn==19.8.1
 pipenv==2018.7.1
 virtualenv==16.0.0
